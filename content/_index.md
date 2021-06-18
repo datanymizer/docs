@@ -4,7 +4,7 @@ title = "Datanymizer"
 # The homepage contents
 [extra]
 lead = '<b>Datanymizer</b> is a powerful database anonymizer with flexible rules. Written in Rust.'
-url = "/docs/getting-started/introduction//"
+url = "/getting-started/introduction//"
 url_button = "Get started"
 repo_version = "GitHub v0.2.0"
 repo_license = "Open-source MIT License."
