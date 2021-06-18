@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "https://datanymizer.github.com"
+base_url = "https://datanymizer.github.com/docs"
 title = "Datanymizer"
 description = "Powerful database anonymizer with flexible rules. Written in Rust."
 
