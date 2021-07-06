@@ -1,5 +1,5 @@
 +++
-title = "Basic types"
+title = "Basic generators"
 description = ""
 date = 2021-05-01T08:00:00+00:00
 updated = 2021-05-01T08:00:00+00:00
@@ -30,7 +30,7 @@ You can specify the probability of TRUE value:
 
 ```yaml
 boolean:
-  # 40% for the TRUE and 60% for the FALSE  
+  # 40% for the TRUE and 60% for the FALSE
   ratio: 40
 ```
 
@@ -54,7 +54,7 @@ datetime:
   to: 2010-12-31T00:00:00+00:00
 ```
 
-Also, you can specify datetime format 
+Also, you can specify datetime format
 ([available specifiers](https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html)).
 Be careful with this option
 
@@ -62,6 +62,10 @@ Be careful with this option
 datetime:
   format: %Y-%m-%dT%H:%M:%S%.f%:z
 ```
+
+#### digit
+
+Gets a localized digit symbol (e.g., `2` or `5` for the English locale).
 
 ### random_num
 
@@ -119,3 +123,9 @@ Gets a random datetime (without formatting).
 TODO: Examples
 ```
 
+#### color
+
+Gets a color code (e.g., `#ffffff`).
+```
+TODO: Examples
+```
