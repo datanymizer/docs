@@ -6,7 +6,11 @@
 
 {% block header %}
   {# This value is matched by the config.extra.menu.main~url #}
+  {% if page.extra.section %}
+  {% set current_section = page.extra.section %}
+  {% else %}
   {% set current_section = "docs" %}
+  {% endif %}
   {{ macros_header::header(current_section=current_section)}}
 {% endblock header %}
 

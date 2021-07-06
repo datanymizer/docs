@@ -84,13 +84,13 @@ og_locale = "en_US"
 # Menu items
 [[extra.menu.main]]
 name = "Docs"
-section = "docs"
+section = "getting-started"
 url = "/getting-started/introduction/"
 weight = 10
 
 [[extra.menu.main]]
 name = "Transformers"
-section = "docs"
+section = "transformers"
 url = "/transformers/about/"
 weight = 20
 

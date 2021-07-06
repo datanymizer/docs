@@ -12,6 +12,7 @@ template = "docs/page.html"
 lead = ""
 toc = true
 top = false
+section = "getting-started"
 +++
 
 ## Getting started with CLI dumper

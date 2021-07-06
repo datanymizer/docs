@@ -6,9 +6,10 @@ updated = 2021-05-01T08:00:00+00:00
 draft = false
 weight = 10
 sort_by = "weight"
-template = "transformers/page.html"
+template = "docs/page.html"
 
 [extra]
+section = "transformers"
 toc = true
 top = true
 +++

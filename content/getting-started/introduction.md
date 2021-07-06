@@ -12,6 +12,7 @@ template = "docs/page.html"
 lead = 'Datanymizer is an open-source, GDPR-compliant, privacy-preserving data anonymization tool flexible about how the anonymization takes place.'
 toc = true
 top = false
+section = "getting-started"
 +++
 
 ## Quick Start
