@@ -4,16 +4,14 @@ description = "Common configuration options"
 date = 2021-07-06T08:00:00+00:00
 updated = 2021-07-06T08:00:00+00:00
 draft = false
-weight = 9
+weight = 20
 sort_by = "weight"
-template = "docs/page.html"
+template = "transformers/page.html"
 
 [extra]
 toc = true
 top = false
 +++
-
-## Common configuration options
 
 Many of transformers don't need any configuration. You can use them just like this:
 

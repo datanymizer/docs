@@ -4,9 +4,9 @@ description = "Transformers to use with internet topics"
 date = 2021-05-01T08:00:00+00:00
 updated = 2021-05-01T08:00:00+00:00
 draft = false
-weight = 10
+weight = 31
 sort_by = "weight"
-template = "docs/page.html"
+template = "transformers/page.html"
 
 [extra]
 toc = true

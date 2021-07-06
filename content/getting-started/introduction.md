@@ -24,7 +24,7 @@ How to connect with database and make native sql dump. [TODO]
 
 ## Transformers
 
-To transform sensitive data you can use different types of [Transformers](/docs/transformers/).
+To transform sensitive data you can use different types of [Transformers](/transformers/).
 
 ## Help
 
