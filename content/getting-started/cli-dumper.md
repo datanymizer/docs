@@ -1,5 +1,5 @@
 +++
-title = "First start"
+title = "First steps"
 description = "Getting started with CLI dumper"
 date = 2021-05-01T08:20:00+00:00
 updated = 2021-05-01T08:20:00+00:00
