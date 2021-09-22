@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://datanymizer.github.io/docs/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://datanymizer.github.io/docs/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="stylesheet" href="https://datanymizer.github.io/docs/main.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Basic generators | Datanymizer</title>
+<meta name="description" content="Powerful database anonymizer with flexible rules. Written in Rust.">
+<link rel="canonical" href="https://datanymizer.github.io/docs/transformers/basic/">
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://datanymizer.github.io/docs/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "Transformers",
+            "item": "https://datanymizer.github.io/docs/transformers/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "Basic",
+            "item": "https://datanymizer.github.io/docs/transformers/basic/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://datanymizer.github.io/docs/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://datanymizer.github.io/docs/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://datanymizer.github.io/docs/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://datanymizer.github.io/docs/site.webmanifest">
+  
+
+
+  
+
+</head>
+
+  
+
+<body class="docs single">
+  
+  
+  
+  
+  
+  
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://datanymizer.github.io/docs">Datanymizer</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/datanymizer/datanymizer"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="https://datanymizer.github.io/docs/getting-started/introduction/">Docs</a>
+						</li>
+					
+						<li class="nav-item transformers active">
+							<a class="nav-link" href="https://datanymizer.github.io/docs/transformers/about/">Transformers</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search docs..."
+						aria-label="Search docs..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+</header>
+
+
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row flex-xl-nowrap">
+	  
+<div class="col-lg-5 col-xl-4 docs-sidebar">
+	<nav class="docs-links" aria-label="Main navigation">
+			
+			
+			
+					<h3>Transformers</h3>
+					<ul class="list-unstyled">
+					
+							<li><a class="docs-link" href="https://datanymizer.github.io/docs/transformers/about/">Transformers</a></li>
+					
+							<li><a class="docs-link" href="https://datanymizer.github.io/docs/transformers/common/">Common configuration options</a></li>
+					
+							<li><a class="docs-link active" href="https://datanymizer.github.io/docs/transformers/basic/">Basic generators</a></li>
+					
+							<li><a class="docs-link" href="https://datanymizer.github.io/docs/transformers/special/">Special generators</a></li>
+					
+							<li><a class="docs-link" href="https://datanymizer.github.io/docs/transformers/buisness/">Buisness</a></li>
+					
+							<li><a class="docs-link" href="https://datanymizer.github.io/docs/transformers/currencies/">Currencies</a></li>
+					
+							<li><a class="docs-link" href="https://datanymizer.github.io/docs/transformers/files/">Files</a></li>
+					
+							<li><a class="docs-link" href="https://datanymizer.github.io/docs/transformers/internet/">Internet and communications</a></li>
+					
+							<li><a class="docs-link" href="https://datanymizer.github.io/docs/transformers/job/">Job</a></li>
+					
+							<li><a class="docs-link" href="https://datanymizer.github.io/docs/transformers/locations/">Locations</a></li>
+					
+							<li><a class="docs-link" href="https://datanymizer.github.io/docs/transformers/people/">People</a></li>
+					
+							<li><a class="docs-link" href="https://datanymizer.github.io/docs/transformers/texts/">Text (lorem ipsum or its analog)</a></li>
+					
+					</ul>
+			
+			
+	</nav>
+</div>
+
+	  
+  
+  <nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+  	<div class="page-links">
+  			<h3>On this page</h3>
+  			<nav id="TableOfContents">
+  					<ul>
+  							
+  							<li><a href="https://datanymizer.github.io/docs/transformers/basic/#boolean">boolean</a></li>
+  							
+  							
+  							<li><a href="https://datanymizer.github.io/docs/transformers/basic/#datetime">datetime</a></li>
+  							
+  									<ul>
+  											
+  											<li><a href="https://datanymizer.github.io/docs/transformers/basic/#digit">digit</a></li>
+  											
+  									</ul>
+  							
+  							
+  							<li><a href="https://datanymizer.github.io/docs/transformers/basic/#random-num">random_num</a></li>
+  							
+  							
+  							<li><a href="https://datanymizer.github.io/docs/transformers/basic/#raw-date">raw_date</a></li>
+  							
+  							
+  							<li><a href="https://datanymizer.github.io/docs/transformers/basic/#raw-datetime">raw_datetime</a></li>
+  							
+  									<ul>
+  											
+  											<li><a href="https://datanymizer.github.io/docs/transformers/basic/#color">color</a></li>
+  											
+  									</ul>
+  							
+  							
+  					</ul>
+  			</nav>
+  	</div>
+  </nav>
+  
+
+      <main class="docs-content col-lg-11 col-xl-9">
+        <h1>Basic generators</h1>
+        
+        <h3 id="boolean">boolean</h3>
+<p>Gets a boolean value (TRUE/FALSE), with a given probability.</p>
+<p>Examples:</p>
+<p>The default:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">boolean</span><span style="color:#c0c5ce;">: {}
+</span></code></pre>
+<p>You can specify the probability of TRUE value:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">boolean</span><span style="color:#c0c5ce;">:
+  </span><span style="color:#65737e;"># 40% for the TRUE and 60% for the FALSE
+  </span><span style="color:#bf616a;">ratio</span><span style="color:#c0c5ce;">: </span><span style="color:#d08770;">40
+</span></code></pre><h3 id="datetime">datetime</h3>
+<p>Generates random dates.</p>
+<p>Examples:</p>
+<p>The default:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">datetime</span><span style="color:#c0c5ce;">: {}
+</span></code></pre>
+<p>You can specify a range:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">datetime</span><span style="color:#c0c5ce;">:
+  </span><span style="color:#bf616a;">from</span><span style="color:#c0c5ce;">: </span><span style="color:#d08770;">1990-01-01T00:00:00+00:00
+  </span><span style="color:#bf616a;">to</span><span style="color:#c0c5ce;">: </span><span style="color:#d08770;">2010-12-31T00:00:00+00:00
+</span></code></pre>
+<p>Also, you can specify datetime format
+(<a href="https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html">available specifiers</a>).
+Be careful with this option</p>
+<pre style="background-color:#2b303b;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">datetime</span><span style="color:#c0c5ce;">:
+  </span><span style="color:#bf616a;">format</span><span style="color:#c0c5ce;">: %</span><span style="color:#a3be8c;">Y-%m-%dT%H:%M:%S%.f%:z
+</span></code></pre><h4 id="digit">digit</h4>
+<p>Gets a localized digit symbol (e.g., <code>2</code> or <code>5</code> for the English locale).</p>
+<h3 id="random-num">random_num</h3>
+<p>Gets a random number.</p>
+<p>Examples:</p>
+<p>The default:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">random_num</span><span style="color:#c0c5ce;">: {}
+</span></code></pre>
+<p>You can specify a range (one border or both):</p>
+<pre style="background-color:#2b303b;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">random_num</span><span style="color:#c0c5ce;">:
+  </span><span style="color:#bf616a;">min</span><span style="color:#c0c5ce;">: </span><span style="color:#d08770;">10
+  </span><span style="color:#bf616a;">max</span><span style="color:#c0c5ce;">: </span><span style="color:#d08770;">20
+</span></code></pre>
+<p>The default range is from <code>0</code> to <code>2^64 - 1</code> (for 64-bit application binary).</p>
+<p>If you want to generate unique numbers, use this option:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">random_num</span><span style="color:#c0c5ce;">:
+  </span><span style="color:#bf616a;">uniq</span><span style="color:#c0c5ce;">: </span><span style="color:#d08770;">true
+</span></code></pre>
+<p>The transformer will collect information about generated numbers and check their uniqueness.
+If such a number already exists in the list, then the transformer will try to generate the value again.
+You can limit the number of tries (the default is <code>3</code>):</p>
+<pre style="background-color:#2b303b;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">random_num</span><span style="color:#c0c5ce;">:
+  </span><span style="color:#bf616a;">uniq</span><span style="color:#c0c5ce;">:
+    </span><span style="color:#bf616a;">required</span><span style="color:#c0c5ce;">: </span><span style="color:#d08770;">true
+    </span><span style="color:#bf616a;">try_count</span><span style="color:#c0c5ce;">: </span><span style="color:#d08770;">5
+</span></code></pre><h3 id="raw-date">raw_date</h3>
+<p>Gets a random date (without formatting).</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">TODO: Examples
+</span></code></pre><h3 id="raw-datetime">raw_datetime</h3>
+<p>Gets a random datetime (without formatting).</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">TODO: Examples
+</span></code></pre><h4 id="color">color</h4>
+<p>Gets a color code (e.g., <code>#ffffff</code>).</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">TODO: Examples
+</span></code></pre>
+        
+        
+<div class="docs-navigation d-flex justify-content-between">
+  
+  
+  
+  
+  
+  <a href="https:&#x2F;&#x2F;datanymizer.github.io&#x2F;docs&#x2F;transformers&#x2F;common&#x2F;">
+    <div class="card my-1">
+      <div class="card-body py-2">
+        &larr; Common configuration options
+      </div>
+    </div>
+  </a>
+  
+
+  
+  
+  
+  
+  
+    <a class="ms-auto" href="https:&#x2F;&#x2F;datanymizer.github.io&#x2F;docs&#x2F;transformers&#x2F;special&#x2F;">
+      <div class="card my-1">
+        <div class="card-body py-2">
+          Special generators &rarr;
+        </div>
+      </div>
+    </a>
+  
+</div>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Sponsored by <a href="https://evrone.com/">Evrone</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script src="https://datanymizer.github.io/docs/js/main.js" defer></script>
+
+  <script src="https://datanymizer.github.io/docs/plugins/elasticlunr.min.js" defer></script>
+  <script src="https://datanymizer.github.io/docs/search_index.en.js" defer></script>
+  <script src="https://datanymizer.github.io/docs/js/search.js" defer></script>
+
+  
+</body>
+</html>

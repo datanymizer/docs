@@ -1,0 +1,877 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>Datanymizer</title>
+	<subtitle>Powerful database anonymizer with flexible rules. Written in Rust.</subtitle>
+	<link href="https://datanymizer.github.io/docs/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://datanymizer.github.io/docs"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2021-07-31T08:20:00+00:00</updated>
+	<id>https://datanymizer.github.io/docs/atom.xml</id>
+	<entry xml:lang="en">
+		<title>PG Datanymizer</title>
+		<published>2021-07-31T08:20:00+00:00</published>
+		<updated>2021-07-31T08:20:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/getting-started/pg-dumper/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/getting-started/pg-dumper/</id>
+		<content type="html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;pg_datanymizer&lt;&#x2F;code&gt; is the command line application for anonymizing data from PostgreSQL databases.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;usage&quot;&gt;Usage&lt;&#x2F;h3&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;pg_datanymizer [OPTIONS] &amp;lt;DBNAME&amp;gt; [PG_DUMP_ARGS]...
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;flags&quot;&gt;Flags&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Name&lt;&#x2F;th&gt;&lt;th&gt;Description&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;--help&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Prints help information&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;-V&lt;&#x2F;code&gt;, &lt;code&gt;--version&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Prints version information&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;h3 id=&quot;options&quot;&gt;OPTIONS&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Name&lt;&#x2F;th&gt;&lt;th&gt;Description&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;-f&lt;&#x2F;code&gt;, &lt;code&gt;--file&lt;&#x2F;code&gt; &lt;code&gt;&amp;lt;FILE&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Path to the dump output file, example: &lt;code&gt;&#x2F;tmp&#x2F;dump.sql&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;-c&lt;&#x2F;code&gt;, &lt;code&gt;--config&lt;&#x2F;code&gt; &lt;code&gt;&amp;lt;config&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Path to the config file. Default: &lt;code&gt;.&#x2F;config.yml&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;--pg_dump&lt;&#x2F;code&gt; &lt;code&gt;&amp;lt;pg-dump-location&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Postgres &lt;code&gt;pg_dump&lt;&#x2F;code&gt; utility program file location. Default: just &lt;code&gt;pg_dump&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;--accept_invalid_certs&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Accept invalid certificates (e.g., self-signed) when using SSL&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;--accept_invalid_hostnames&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Accept invalid hostnames when using SSL&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;When &lt;code&gt;&amp;lt;DBNAME&amp;gt;&lt;&#x2F;code&gt; is just a database name (not a full url):&lt;&#x2F;td&gt;&lt;td&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;-h&lt;&#x2F;code&gt;, &lt;code&gt;--host&lt;&#x2F;code&gt; &lt;code&gt;&amp;lt;host&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Database server host or a socket directory. Default: &lt;code&gt;localhost&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;-W&lt;&#x2F;code&gt;, &lt;code&gt;--password&lt;&#x2F;code&gt; &lt;code&gt;&amp;lt;password&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;User password&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;-p&lt;&#x2F;code&gt;, &lt;code&gt;--port&lt;&#x2F;code&gt; &lt;code&gt;&amp;lt;port&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Database server port number. Default: &lt;code&gt;5432&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;-U&lt;&#x2F;code&gt;, &lt;code&gt;--username&lt;&#x2F;code&gt; &lt;code&gt;&amp;lt;username&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Connect as the specified database user&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;h3 id=&quot;args&quot;&gt;ARGS&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Name&lt;&#x2F;th&gt;&lt;th&gt;Description&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;&amp;lt;DBNAME&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Postgres database URL, e.g. &lt;code&gt;postgres:&#x2F;&#x2F;postgres:password@localhost:5432&#x2F;database_name?sslmode=disable&lt;&#x2F;code&gt; (you can omit some parts), or just a database name, e.g. &lt;code&gt;my_db&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;&amp;lt;PG_DUMP_ARGS&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;The remaining arguments are passed directly to &lt;code&gt;pg_dump&lt;&#x2F;code&gt; calls. You should add &lt;code&gt;--&lt;&#x2F;code&gt; before &lt;code&gt;&amp;lt;DBNAME&amp;gt;&lt;&#x2F;code&gt; in such cases&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Common configuration options</title>
+		<published>2021-07-06T08:00:00+00:00</published>
+		<updated>2021-07-06T08:00:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/transformers/common/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/transformers/common/</id>
+		<content type="html">&lt;p&gt;Many of transformers don&#x27;t need any configuration. You can use them just like this:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# gets a person last name
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;last_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;If there are no specific notes in the documentation for some transformer,
+then there are no configuration options for it.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;locales&quot;&gt;Locales&lt;&#x2F;h3&gt;
+&lt;p&gt;Also many of them support locale configuration:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# gets a person last name
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;last_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;locale&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;RU
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Please refer &lt;a href=&quot;https:&#x2F;&#x2F;datanymizer.github.io&#x2F;docs&#x2F;transformers&#x2F;common&#x2F;config.md#default&quot;&gt;here&lt;&#x2F;a&gt; for the list of available locales.&lt;&#x2F;p&gt;
+&lt;p&gt;In this document we mark such transformers with the globe symbol 🌐.&lt;&#x2F;p&gt;
+&lt;p&gt;For some transformers, specifying the locale now may not have any practical effect
+(but it may have an effect in the future).&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;uniqueness&quot;&gt;Uniqueness&lt;&#x2F;h3&gt;
+&lt;p&gt;You can specify that result values must be unique (they are not unique by default).
+You can use short or full syntax.&lt;&#x2F;p&gt;
+&lt;p&gt;Short:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;email&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uniq&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Full:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;email&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uniq&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;required&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;try_count&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Uniqueness is ensured by re-generating values when they are same.&lt;&#x2F;p&gt;
+&lt;p&gt;You can customize the number of attempts with &lt;code&gt;try_count&lt;&#x2F;code&gt; (this is an optional field, the default
+number of tries depends on the rule, for some rules it can be guessed automatically).&lt;&#x2F;p&gt;
+&lt;p&gt;Currently, uniqueness is supported by: &lt;a href=&quot;https:&#x2F;&#x2F;datanymizer.github.io&#x2F;docs&#x2F;transformers&#x2F;common&#x2F;#email&quot;&gt;email&lt;&#x2F;a&gt;, &lt;a href=&quot;https:&#x2F;&#x2F;datanymizer.github.io&#x2F;docs&#x2F;transformers&#x2F;common&#x2F;#ip&quot;&gt;ip&lt;&#x2F;a&gt;, &lt;a href=&quot;https:&#x2F;&#x2F;datanymizer.github.io&#x2F;docs&#x2F;transformers&#x2F;common&#x2F;#phone&quot;&gt;phone&lt;&#x2F;a&gt;,
+&lt;a href=&quot;https:&#x2F;&#x2F;datanymizer.github.io&#x2F;docs&#x2F;transformers&#x2F;common&#x2F;#random_num&quot;&gt;random_num&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;In the future, we plan to add support for the uniqueness option for all transformers.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>First steps</title>
+		<published>2021-05-01T08:20:00+00:00</published>
+		<updated>2021-05-01T08:20:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/getting-started/cli-dumper/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/getting-started/cli-dumper/</id>
+		<content type="html">&lt;h2 id=&quot;getting-started-with-cli-dumper&quot;&gt;Getting started with CLI dumper&lt;&#x2F;h2&gt;
+&lt;p&gt;First, inspect your database schema, choose fields with sensitive data, and create a config file based on it.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# config.yml
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tables&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;markets
+    rules&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name_translations&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;format&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;{&amp;quot;en&amp;quot;: &amp;quot;{{_1}}&amp;quot;, &amp;quot;ru&amp;quot;: &amp;quot;{{_2}}&amp;quot;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;&amp;#39;
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rules&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+            - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;words&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;min&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1
+                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2
+            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;words&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;min&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1
+                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;franchisees
+    rules&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;operator_mail&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;format&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;user-{{_1}}-{{_2}}
+          rules&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+            - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;random_num&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+            - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;email&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;kind&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Safe
+      operator_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;first_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;operator_phone&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;phone&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;format&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;+###########
+      name_translations&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;format&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;{&amp;quot;en&amp;quot;: &amp;quot;{{_1}}&amp;quot;, &amp;quot;ru&amp;quot;: &amp;quot;{{_2}}&amp;quot;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;&amp;#39;
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rules&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+            - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;words&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;min&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2
+                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3
+            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;words&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;min&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2
+                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;users
+    rules&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;first_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;first_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;last_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;last_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+  - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;customers
+    rules&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;email&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;format&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;user-{{_1}}-{{_2}}
+          rules&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+            - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;random_num&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+            - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;email&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;kind&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Safe
+                uniq&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:  
+                  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;required&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+                  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;try_count&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;phone&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;phone&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;format&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;+7##########
+          uniq&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;city&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;city&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;age&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;random_num&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;min&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;99
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;first_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;first_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;last_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;last_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;birth_date&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;datetime&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;from&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1990-01-01T00:00:00+00:00
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;to&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2010-12-31T00:00:00+00:00
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;And then start to make dump from your database instance:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pg_datanymizer -f&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; &#x2F;tmp&#x2F;dump.sql&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -c&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; .&#x2F;config.yml postgres:&#x2F;&#x2F;postgres:postgres@localhost&#x2F;test_database
+
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;It creates new dump file &lt;code&gt;&#x2F;tmp&#x2F;dump.sql&lt;&#x2F;code&gt; with native SQL dump for Postgresql database. You can import fake data from this dump into new Postgresql database with command:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;psql -U&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; postgres&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -d&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; new_database &amp;lt; &#x2F;tmp&#x2F;dump.sql
+
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Dumper can stream dump to &lt;code&gt;STDOUT&lt;&#x2F;code&gt; like &lt;code&gt;pg_dump&lt;&#x2F;code&gt; and you can use it in other pipelines:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pg_datanymizer -c&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; .&#x2F;config.yml postgres:&#x2F;&#x2F;postgres:postgres@localhost&#x2F;test_database &amp;gt; &#x2F;tmp&#x2F;dump.sql
+
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Quick Start</title>
+		<published>2021-05-01T08:20:00+00:00</published>
+		<updated>2021-05-01T08:20:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/getting-started/quick-start/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/getting-started/quick-start/</id>
+		<content type="html">&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;&#x2F;h2&gt;
+&lt;p&gt;There are several ways to install &lt;code&gt;pg_datanymizer&lt;&#x2F;code&gt; CLI tool. Choose a more convenient option for you.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;pre-compiled-binary&quot;&gt;Pre-compiled binary&lt;&#x2F;h3&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Linux &#x2F; macOS &#x2F; Windows (MINGW and etc). Installs it into .&#x2F;bin&#x2F; by default
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; curl&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -sSfL&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;datanymizer&#x2F;datanymizer&#x2F;main&#x2F;cli&#x2F;pg_datanymizer&#x2F;install.sh | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sh -s
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Or more shorter way
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; curl&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -sSfL&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; https:&#x2F;&#x2F;git.io&#x2F;pg_datanymizer | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sh -s
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Specify installation directory and version
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; curl&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -sSfL&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; https:&#x2F;&#x2F;git.io&#x2F;pg_datanymizer | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sh -s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; -- -b usr&#x2F;local&#x2F;bin v0.2.0
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Alpine Linux (wget)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;$ wget -q -O - https:&#x2F;&#x2F;git.io&#x2F;pg_datanymizer | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sh -s
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;or run with Docker:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; docker run&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --rm -v &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;`&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pwd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;`:&#x2F;app&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -w&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; &#x2F;app datanymizer&#x2F;pg_datanymizer
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;homebrew-linuxbrew&quot;&gt;Homebrew &#x2F; Linuxbrew&lt;&#x2F;h3&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Installs the latest stable release
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; brew install datanymizer&#x2F;tap&#x2F;pg_datanymizer
+
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Builds the latest version from the repository
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;$ brew install&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --HEAD&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; datanymizer&#x2F;tap&#x2F;pg_datanymizer
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h2 id=&quot;how-to-run&quot;&gt;How to run&lt;&#x2F;h2&gt;
+&lt;p&gt;The README contains an example configuration that you can use as a starting point.&lt;&#x2F;p&gt;
+&lt;p&gt;Now you can invoke Datanymizer to generate a cleansed dump of your data:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; pg_datanymizer&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -f&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; &#x2F;tmp&#x2F;dump.sql&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -c&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt; .&#x2F;config.yml postgres:&#x2F;&#x2F;postgres:postgres@localhost&#x2F;test_database
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Introduction</title>
+		<published>2021-05-01T08:00:00+00:00</published>
+		<updated>2021-05-01T08:00:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/getting-started/introduction/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/getting-started/introduction/</id>
+		<content type="html">&lt;h2 id=&quot;quick-start&quot;&gt;Quick Start&lt;&#x2F;h2&gt;
+&lt;p&gt;There are several ways to install pg_datanymizer. Choose a more convenient option for you. &lt;a href=&quot;..&#x2F;quick-start&#x2F;&quot;&gt;Quick Start →&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;how-to-start-dumping&quot;&gt;How to start dumping&lt;&#x2F;h2&gt;
+&lt;p&gt;How to connect with database and make native sql dump. [TODO]&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;transformers&quot;&gt;Transformers&lt;&#x2F;h2&gt;
+&lt;p&gt;To transform sensitive data you can use different types of &lt;a href=&quot;&#x2F;docs&#x2F;transformers&#x2F;about&#x2F;&quot;&gt;Transformers&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;help&quot;&gt;Help&lt;&#x2F;h2&gt;
+&lt;p&gt;Get help on Datanymizer.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Transformers</title>
+		<published>2021-05-01T08:00:00+00:00</published>
+		<updated>2021-05-01T08:00:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/transformers/about/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/transformers/about/</id>
+		<content type="html">&lt;p&gt;We call the anonymization rules for the table columns &lt;code&gt;transformers&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;You should use them in the &lt;a href=&quot;https:&#x2F;&#x2F;datanymizer.github.io&#x2F;docs&#x2F;transformers&#x2F;about&#x2F;config.md#rules&quot;&gt;rules&lt;&#x2F;a&gt; sections of the configuration file.&lt;&#x2F;p&gt;
+&lt;p&gt;Example:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rules&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# `field_name` is a name of database column
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;field_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# gets a person full name
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;person_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In other examples we will omit the &lt;code&gt;rules.field_name&lt;&#x2F;code&gt; part.&lt;&#x2F;p&gt;
+&lt;p&gt;This document contains the full list of transformers (grouped by categories).&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Basic generators</title>
+		<published>2021-05-01T08:00:00+00:00</published>
+		<updated>2021-05-01T08:00:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/transformers/basic/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/transformers/basic/</id>
+		<content type="html">&lt;h3 id=&quot;boolean&quot;&gt;boolean&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a boolean value (TRUE&#x2F;FALSE), with a given probability.&lt;&#x2F;p&gt;
+&lt;p&gt;Examples:&lt;&#x2F;p&gt;
+&lt;p&gt;The default:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;boolean&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You can specify the probability of TRUE value:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;boolean&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 40% for the TRUE and 60% for the FALSE
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ratio&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;40
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;datetime&quot;&gt;datetime&lt;&#x2F;h3&gt;
+&lt;p&gt;Generates random dates.&lt;&#x2F;p&gt;
+&lt;p&gt;Examples:&lt;&#x2F;p&gt;
+&lt;p&gt;The default:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;datetime&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You can specify a range:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;datetime&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;from&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1990-01-01T00:00:00+00:00
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;to&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2010-12-31T00:00:00+00:00
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Also, you can specify datetime format
+(&lt;a href=&quot;https:&#x2F;&#x2F;docs.rs&#x2F;chrono&#x2F;0.4.19&#x2F;chrono&#x2F;format&#x2F;strftime&#x2F;index.html&quot;&gt;available specifiers&lt;&#x2F;a&gt;).
+Be careful with this option&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;datetime&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;format&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: %&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Y-%m-%dT%H:%M:%S%.f%:z
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h4 id=&quot;digit&quot;&gt;digit&lt;&#x2F;h4&gt;
+&lt;p&gt;Gets a localized digit symbol (e.g., &lt;code&gt;2&lt;&#x2F;code&gt; or &lt;code&gt;5&lt;&#x2F;code&gt; for the English locale).&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;random-num&quot;&gt;random_num&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a random number.&lt;&#x2F;p&gt;
+&lt;p&gt;Examples:&lt;&#x2F;p&gt;
+&lt;p&gt;The default:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;random_num&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You can specify a range (one border or both):&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;random_num&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;min&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;20
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The default range is from &lt;code&gt;0&lt;&#x2F;code&gt; to &lt;code&gt;2^64 - 1&lt;&#x2F;code&gt; (for 64-bit application binary).&lt;&#x2F;p&gt;
+&lt;p&gt;If you want to generate unique numbers, use this option:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;random_num&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uniq&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The transformer will collect information about generated numbers and check their uniqueness.
+If such a number already exists in the list, then the transformer will try to generate the value again.
+You can limit the number of tries (the default is &lt;code&gt;3&lt;&#x2F;code&gt;):&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;random_num&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uniq&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;required&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;try_count&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;raw-date&quot;&gt;raw_date&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a random date (without formatting).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;raw-datetime&quot;&gt;raw_datetime&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a random datetime (without formatting).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h4 id=&quot;color&quot;&gt;color&lt;&#x2F;h4&gt;
+&lt;p&gt;Gets a color code (e.g., &lt;code&gt;#ffffff&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Buisness</title>
+		<published>2021-05-01T08:00:00+00:00</published>
+		<updated>2021-05-01T08:00:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/transformers/buisness/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/transformers/buisness/</id>
+		<content type="html">&lt;h3 id=&quot;company-activity&quot;&gt;company_activity&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a company activity description (e.g., &lt;code&gt;integrate vertical markets&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;company-activity-verb&quot;&gt;company_activity_verb&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a company activity verb.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;company-activity-adj&quot;&gt;company_activity_adj&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a company activity adjective.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;company-activity-noun&quot;&gt;company_activity_noun&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a company activity noun.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;company-motto&quot;&gt;company_motto&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a company motto.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;company-motto-head&quot;&gt;company_motto_head&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a head component of a company motto.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;company-motto-middle&quot;&gt;company_motto_middle&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a middle component of a company motto.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;company-motto-tail&quot;&gt;company_motto_tail&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a tail component of a company motto.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;company-name&quot;&gt;company_name&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a company name.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;company-suffix&quot;&gt;company_suffix&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a company name suffix (e.g., &lt;code&gt;Inc.&lt;&#x2F;code&gt; or &lt;code&gt;LLC&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;industry&quot;&gt;industry&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets an industry name.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;profession&quot;&gt;profession&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a profession name.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Currencies</title>
+		<published>2021-05-01T08:00:00+00:00</published>
+		<updated>2021-05-01T08:00:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/transformers/currencies/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/transformers/currencies/</id>
+		<content type="html">&lt;h3 id=&quot;currency-code&quot;&gt;currency_code&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a currency code (e.g., &lt;code&gt;EUR&lt;&#x2F;code&gt; or &lt;code&gt;USD&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;currency-name&quot;&gt;currency_name&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a currency name.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;currency-symbol&quot;&gt;currency_symbol&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a currency symbol.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Files</title>
+		<published>2021-05-01T08:00:00+00:00</published>
+		<updated>2021-05-01T08:00:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/transformers/files/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/transformers/files/</id>
+		<content type="html">&lt;h3 id=&quot;dir-path&quot;&gt;dir_path&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a file directory path.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;file-extension&quot;&gt;file_extension&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a file extension.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;file-name&quot;&gt;file_name&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a file name.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;file-path&quot;&gt;file_path&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a file path.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Internet and communications</title>
+		<published>2021-05-01T08:00:00+00:00</published>
+		<updated>2021-05-01T08:00:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/transformers/internet/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/transformers/internet/</id>
+		<content type="html">&lt;h3 id=&quot;domain-suffix&quot;&gt;domain_suffix&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a domain suffix (e.g., &lt;code&gt;com&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;email&quot;&gt;email&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a random email. You can specify a kind. The kind can be &lt;code&gt;Safe&lt;&#x2F;code&gt; (it is default) or &lt;code&gt;Free&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;With the &lt;code&gt;Safe&lt;&#x2F;code&gt; kind the transformer generates only emails for example domains (e.g., &lt;code&gt;some@example.com&lt;&#x2F;code&gt;).
+It is not real email addresses.&lt;&#x2F;p&gt;
+&lt;p&gt;With the &lt;code&gt;Free&lt;&#x2F;code&gt; kind the transformer generates emails for free email providers (e.g., &lt;code&gt;some@gmail.com&lt;&#x2F;code&gt;,
+&lt;code&gt;some@yahoo.com&lt;&#x2F;code&gt;, &lt;code&gt;some@hotmail.com&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;p&gt;Examples:&lt;&#x2F;p&gt;
+&lt;p&gt;The default:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;email&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You can specify the kind:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;email&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;kind&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Free
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;If you want to generate unique emails, use this option:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;email&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uniq&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The transformer will collect information about generated emails and check their uniqueness.
+If such a email already exists in the list, then the transformer will try to generate the value again.
+You can limit the number of tries (the default is &lt;code&gt;3&lt;&#x2F;code&gt;):&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;email&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uniq&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;required&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;try_count&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;free-email-provider&quot;&gt;free_email_provider&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a free email provider name (e. g., &lt;code&gt;gmail.com&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;ip&quot;&gt;ip&lt;&#x2F;h3&gt;
+&lt;p&gt;Generates an IP address.&lt;&#x2F;p&gt;
+&lt;p&gt;You can specify the kind (&lt;code&gt;V4&lt;&#x2F;code&gt; or &lt;code&gt;V6&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;p&gt;Examples:&lt;&#x2F;p&gt;
+&lt;p&gt;The default:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ip&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Default kind is &lt;code&gt;V4&lt;&#x2F;code&gt;, you can specify V6:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ip&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;kind&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;V6
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;local-cell-phone&quot;&gt;local_cell_phone&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a local cell phone number (for a given locale).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;local-phone&quot;&gt;local_phone&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a local phone number (for a given locale).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;mac-address&quot;&gt;mac_address&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a MAC address.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;password&quot;&gt;password&lt;&#x2F;h3&gt;
+&lt;p&gt;Generates a random password.&lt;&#x2F;p&gt;
+&lt;p&gt;You can set minimum and maximum string length.&lt;&#x2F;p&gt;
+&lt;p&gt;Examples:&lt;&#x2F;p&gt;
+&lt;p&gt;The default:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;password&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;With a custom length (the default &lt;code&gt;min&lt;&#x2F;code&gt; option is &lt;code&gt;8&lt;&#x2F;code&gt; and the &lt;code&gt;max&lt;&#x2F;code&gt; option is &lt;code&gt;20&lt;&#x2F;code&gt;):&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;password&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;min&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;phone&quot;&gt;phone&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a random phone number.&lt;&#x2F;p&gt;
+&lt;p&gt;Examples:&lt;&#x2F;p&gt;
+&lt;p&gt;The default:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;phone&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You can specify the phone format:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;phone&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;format&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;+7^#########&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;where:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;#&lt;&#x2F;code&gt; - any digit from 0 to 9&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;^&lt;&#x2F;code&gt; - any digit from 1 to 9&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Also, you can use any other symbols in format: &lt;code&gt;^##-00-### (##-##)&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;The default format is &lt;code&gt;+###########&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;If you want to generate unique phone numbers for this database column, use the &lt;code&gt;uniq&lt;&#x2F;code&gt; option:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;phone&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uniq&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The transformer will collect information about generated numbers and check their uniqueness.
+If such a number already exists in the list, then the transformer will try to generate the value again.
+The number of attempts is limited by the number of available invariants based on the format.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;user-agent&quot;&gt;user_agent&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a User-Agent header.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;username&quot;&gt;username&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a username (login).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Job</title>
+		<published>2021-05-01T08:00:00+00:00</published>
+		<updated>2021-05-01T08:00:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/transformers/job/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/transformers/job/</id>
+		<content type="html">&lt;h3 id=&quot;job-field&quot;&gt;job_field&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a job field.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;job-position&quot;&gt;job_position&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a job position.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;job-seniority&quot;&gt;job_seniority&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a job seniority (e.g., &lt;code&gt;Lead&lt;&#x2F;code&gt;, &lt;code&gt;Senior&lt;&#x2F;code&gt; or &lt;code&gt;Junior&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;job-title&quot;&gt;job_title&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a job title (seniority + field + position).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Locations</title>
+		<published>2021-05-01T08:00:00+00:00</published>
+		<updated>2021-05-01T08:00:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/transformers/locations/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/transformers/locations/</id>
+		<content type="html">&lt;h3 id=&quot;building-number&quot;&gt;building_number&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a building number.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;city&quot;&gt;city&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a city name.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;city-prefix&quot;&gt;city_prefix&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a city prefix (e.g., &lt;code&gt;North-&lt;&#x2F;code&gt; or &lt;code&gt;East-&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;city-suffix&quot;&gt;city_suffix&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a city suffix (e.g., &lt;code&gt;-town&lt;&#x2F;code&gt;, &lt;code&gt;-berg&lt;&#x2F;code&gt; or &lt;code&gt;-ville&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;country-code&quot;&gt;country_code&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a country code (e.g., &lt;code&gt;RU&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;country-name&quot;&gt;country_name&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a country name.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;dwelling-type&quot;&gt;dwelling_type&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a dwelling unit type (e.g., &lt;code&gt;Apt.&lt;&#x2F;code&gt; or &lt;code&gt;Suit.&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;dwelling&quot;&gt;dwelling&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a dwelling unit part of the address (apartment, flat...).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;latitude&quot;&gt;latitude&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a latitude.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;longitude&quot;&gt;longitude&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a longitude.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;post-code&quot;&gt;post_code&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a post code.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;state-abbr&quot;&gt;state_abbr&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a state (or the equivalent) abbreviation (e.g., &lt;code&gt;AZ&lt;&#x2F;code&gt; or &lt;code&gt;LA&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;state-name&quot;&gt;state_name&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a state (or the equivalent) name.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;street-name&quot;&gt;street_name&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a street name.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;street-suffix&quot;&gt;street_suffix&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a street suffix (e.g., &lt;code&gt;Avenue&lt;&#x2F;code&gt; or &lt;code&gt;Highway&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;time-zone&quot;&gt;time_zone&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a time zone (e.g., &lt;code&gt;Europe&#x2F;London&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;zip-code&quot;&gt;zip_code&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a zip code.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>People</title>
+		<published>2021-05-01T08:00:00+00:00</published>
+		<updated>2021-05-01T08:00:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/transformers/people/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/transformers/people/</id>
+		<content type="html">&lt;h3 id=&quot;first-name&quot;&gt;first_name&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a person first name.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;last-name&quot;&gt;last_name&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a person last name.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;name-suffix&quot;&gt;name_suffix&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a name suffix (e.g., &lt;code&gt;Jr.&lt;&#x2F;code&gt;)&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;person-name&quot;&gt;person_name&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a person name (full).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;person-name-with-title&quot;&gt;person_name_with_title&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a person name with title.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;person-title&quot;&gt;person_title&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a person name title (e.g., &lt;code&gt;Mr&lt;&#x2F;code&gt; or &lt;code&gt;Ms&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;TODO: Examples
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Special generators</title>
+		<published>2021-05-01T08:00:00+00:00</published>
+		<updated>2021-05-01T08:00:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/transformers/special/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/transformers/special/</id>
+		<content type="html">&lt;h4 id=&quot;none&quot;&gt;none&lt;&#x2F;h4&gt;
+&lt;p&gt;This transformer just does nothing (some sort of &lt;code&gt;noop&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;p&gt;Example:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# You should use ~ (the null value in YAML) for this transformer
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;none&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;~
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h4 id=&quot;capitalize&quot;&gt;capitalize&lt;&#x2F;h4&gt;
+&lt;p&gt;Capitalize a given value (from the database, or a previous value in the pipeline).&lt;&#x2F;p&gt;
+&lt;p&gt;E.g., the &lt;code&gt;3 short words&lt;&#x2F;code&gt; value will be transformed to &lt;code&gt;3 Short Words&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Example:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# You should use ~ (the null value in YAML) for this transformer
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;capitalize&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;~
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h4 id=&quot;pipeline&quot;&gt;pipeline&lt;&#x2F;h4&gt;
+&lt;p&gt;You can use pipelines with complicated rules to generate more difficult values.
+You can use any transformers as steps (as well as other pipelines too)&lt;&#x2F;p&gt;
+&lt;p&gt;Example:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pipeline&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pipes&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;email&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;capitalize&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;~
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The pipes will be executed in the order in which they are specified in the config.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;template&quot;&gt;template&lt;&#x2F;h4&gt;
+&lt;p&gt;This is the most sophisticated and flexible transformer.&lt;&#x2F;p&gt;
+&lt;p&gt;It uses the &lt;a href=&quot;https:&#x2F;&#x2F;tera.netlify.app&quot;&gt;Tera&lt;&#x2F;a&gt; template engine
+(inspired by &lt;a href=&quot;https:&#x2F;&#x2F;jinja.palletsprojects.com&quot;&gt;Jinja2&lt;&#x2F;a&gt;).&lt;&#x2F;p&gt;
+&lt;p&gt;Specification:&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Section&lt;&#x2F;th&gt;&lt;th&gt;Mandatory&lt;&#x2F;th&gt;&lt;th&gt;YAML type&lt;&#x2F;th&gt;&lt;th&gt;Description&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;format&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;yes&lt;&#x2F;td&gt;&lt;td&gt;text&lt;&#x2F;td&gt;&lt;td&gt;The template for generated value&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;rules&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;no&lt;&#x2F;td&gt;&lt;td&gt;list&lt;&#x2F;td&gt;&lt;td&gt;Nested rules (transformers). You can use them in the template&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;variables&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;no&lt;&#x2F;td&gt;&lt;td&gt;dictionary&lt;&#x2F;td&gt;&lt;td&gt;Template variables&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;Examples:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;format&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Hello, {{name}}! {{_1}}:{{_0 | upper}}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;&amp;quot;
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rules&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+    - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;email&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;variables&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Alex
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;where:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;_0&lt;&#x2F;code&gt; - transformed value (original);&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;_1&lt;&#x2F;code&gt;, &lt;code&gt;_2&lt;&#x2F;code&gt;, ... &lt;code&gt;_N&lt;&#x2F;code&gt; - nested rules by index (started from 1). You can use any transformer (including templates);&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;name&lt;&#x2F;code&gt; - the named variable from the &lt;code&gt;variables&lt;&#x2F;code&gt; section.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;It will generate something like &lt;code&gt;Hello, Alex! some-fake-email@gmail.com:ORIGINALVALUE&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;You can use any filter or markup from the Tera template engine.&lt;&#x2F;p&gt;
+&lt;p&gt;Also, you can use the &lt;a href=&quot;https:&#x2F;&#x2F;datanymizer.github.io&#x2F;docs&#x2F;transformers&#x2F;special&#x2F;config.md#globals&quot;&gt;global&lt;&#x2F;a&gt; variables in templates.&lt;&#x2F;p&gt;
+&lt;p&gt;You can reference values of other row fields in templates.
+Use the &lt;code&gt;prev&lt;&#x2F;code&gt; special variable for original values and the &lt;code&gt;final&lt;&#x2F;code&gt; special variable - for anonymized:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tables&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;some_table
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# You must specify the order of rule execution when using `final`
+    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rule_order&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+      - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;greeting
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;options
+    rules&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;first_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;first_name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;greeting&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Keeping the first name, but anonymizing the last name
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;format&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Hello, {{ prev.first_name }} {{ final.last_name }}!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;&amp;quot;
+      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;options&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;template&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Using the anonymized value again
+          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;format&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;{greeting: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;{{ final.greeting }}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You must specify the order of rule execution when using &lt;code&gt;final&lt;&#x2F;code&gt; with &lt;a href=&quot;https:&#x2F;&#x2F;datanymizer.github.io&#x2F;docs&#x2F;transformers&#x2F;special&#x2F;config.md#rule_order&quot;&gt;rule_order&lt;&#x2F;a&gt;.
+All rules not listed will be placed at the beginning (i.e., you must list only rules with &lt;code&gt;final&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Text (lorem ipsum or its analog)</title>
+		<published>2021-05-01T08:00:00+00:00</published>
+		<updated>2021-05-01T08:00:00+00:00</updated>
+		<link href="https://datanymizer.github.io/docs/transformers/texts/" type="text/html"/>
+		<id>https://datanymizer.github.io/docs/transformers/texts/</id>
+		<content type="html">&lt;h3 id=&quot;paragraph&quot;&gt;paragraph&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a &amp;quot;lorem&amp;quot; paragraph (you can specify a count of sentences).&lt;&#x2F;p&gt;
+&lt;p&gt;Examples:&lt;&#x2F;p&gt;
+&lt;p&gt;The default:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;paragraph&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This is equal to:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;paragraph&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;locale&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;EN
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Min count
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;min&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Max count
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;paragraphs&quot;&gt;paragraphs&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets several &amp;quot;lorem&amp;quot; paragraphs (you can specify a count).&lt;&#x2F;p&gt;
+&lt;p&gt;Examples:&lt;&#x2F;p&gt;
+&lt;p&gt;The default:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;paragraphs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This is equal to:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;paragraphs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;locale&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;EN
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Min count
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;min&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Max count
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;sentence&quot;&gt;sentence&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a &amp;quot;lorem&amp;quot; sentence (you can specify a count of words).&lt;&#x2F;p&gt;
+&lt;p&gt;Examples:&lt;&#x2F;p&gt;
+&lt;p&gt;The default:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sentence&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This is equal to:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sentence&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;locale&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;EN
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Min count
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;min&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Max count
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;sentences&quot;&gt;sentences&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets several &amp;quot;lorem&amp;quot; sentences (you can specify a count).&lt;&#x2F;p&gt;
+&lt;p&gt;Examples:&lt;&#x2F;p&gt;
+&lt;p&gt;The default:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sentences&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This is equal to:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sentences&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;locale&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;EN
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Min count
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;min&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Max count
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;word&quot;&gt;word&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets a &amp;quot;lorem&amp;quot; word.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;words&quot;&gt;words&lt;&#x2F;h3&gt;
+&lt;p&gt;Gets several &amp;quot;lorem&amp;quot; words (you can specify a count).&lt;&#x2F;p&gt;
+&lt;p&gt;Examples:&lt;&#x2F;p&gt;
+&lt;p&gt;The default:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;words&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This is equal to:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;words&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;locale&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;EN
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Min count
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;min&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Max count
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;h3 id=&quot;hex-token&quot;&gt;hex_token&lt;&#x2F;h3&gt;
+&lt;p&gt;Generates random hex tokens. You can set the token length (default is 32).&lt;&#x2F;p&gt;
+&lt;p&gt;Examples:&lt;&#x2F;p&gt;
+&lt;p&gt;The default:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;hex_token&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: {}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;With a custom length:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;&quot;&gt;
+&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;hex_token&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;:
+  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;128
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;</content>
+	</entry>
+</feed>
